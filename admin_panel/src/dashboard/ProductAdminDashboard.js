@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./css/bootstrap.min.css";
 import "./css/fontawesome.min.css";
 import "./css/templatemo-style.css";
@@ -44,8 +44,17 @@ const LineChart = () => {
           title: {
             display: true,
             text: "Hits",
+            color : "white",
           },
+          ticks: {
+            color: "white",
+          }
         },
+        x:{
+          ticks: {
+            color: "white",
+          }
+        }
       },
       maintainAspectRatio: window.innerWidth < widthThreshold ? false : true,
     };
@@ -69,6 +78,25 @@ const LineChart = () => {
             borderColor: "rgb(75, 192, 192)",
             cubicInterpolationMode: "monotone",
             pointRadius: 0,
+            color: "white",
+          },
+          {
+            label: "Popular Hits",
+            data: [32,47,38,21,55,75,70],
+            fill: false,
+            borderColor: "#F7604D",
+            cubicInterpolationMode: "monotone",
+            pointRadius: 0,
+            color: "white",
+          },
+          {
+            label: "Featured",
+            data: [43,20,39,46,86,66,80],
+            fill: false,
+            borderColor: "#9D66CC",
+            cubicInterpolationMode: "monotone",
+            pointRadius: 0,
+            color: "white", 
           },
           // ... other datasets
         ],
@@ -87,6 +115,79 @@ const LineChart = () => {
   return <canvas id="lineChart" ref={chartRef} className="chart" />;
 };
 
+// const BarChart = () => {
+//   const chartRef = useRef(null);
+
+//   useEffect(() => {
+//     const ctxBar = chartRef.current.getContext("2d");
+//     const optionsBar = {
+//       responsive: true,
+//       scales: {
+//         y : {
+//           title: {
+//             display: true,
+//             text: "Hits",
+//             color : "white",
+//           },
+//           ticks: {
+//             color : "white",
+//           }
+//         },
+//         x : {
+//           ticks : {
+//             color : "white",
+//           }
+//         },
+//         yAxes: [
+//           {
+//             barPercentage: 0.2,
+//             ticks: {
+//               beginAtZero: true,
+//             },
+//             scaleLabel: {
+//               display: true,
+//               labelString: "Hits",
+//             },
+//           },
+//         ],
+//       },
+//       maintainAspectRatio: window.innerWidth < widthThreshold ? false : true,
+//     };
+
+//     const configBar = {
+//       type: "bar",
+//       data: {
+//         labels: ["Red", "Aqua", "Green", "Yellow", "Purple", "Orange", "Blue"],
+//         datasets: [
+//           {
+//             label: "# of Hits",
+//             data: [33, 40, 28, 49, 58, 38, 44],
+//             backgroundColor: [
+//               "#F7604D",
+//               "#4ED6B8",
+//               "#A8D582",
+//               "#D7D768",
+//               "#9D66CC",
+//               "#DB9C3F",
+//               "#3889FC",
+//             ],
+//             borderWidth: 0,
+//           },
+//         ],
+//       },
+//       options: optionsBar,
+//     };
+//     // Destroy previous chart if it exists
+//     const existingChart = chartRef.current.chart;
+//     if (existingChart) {
+//       existingChart.destroy();
+//     }
+//     chartRef.current.chart = new Chart(ctxBar, configBar);
+//   }, []);
+
+//   return <canvas id="barChart" ref={chartRef} className="chart" />;
+// };
+
 const BarChart = () => {
   const chartRef = useRef(null);
 
@@ -94,19 +195,24 @@ const BarChart = () => {
     const ctxBar = chartRef.current.getContext("2d");
     const optionsBar = {
       responsive: true,
+      indexAxis: "y", // Display bars horizontally
       scales: {
-        yAxes: [
-          {
-            barPercentage: 0.2,
-            ticks: {
-              beginAtZero: true,
-            },
-            scaleLabel: {
-              display: true,
-              labelString: "Hits",
-            },
+        x: {
+          title: {
+            display: true,
+            text: "Hits",
+            color: "white",
           },
-        ],
+          ticks: {
+            color: "white",
+          },
+        },
+        y: {
+          ticks: {
+            color: "white",
+          },
+          beginAtZero: true,
+        },
       },
       maintainAspectRatio: window.innerWidth < widthThreshold ? false : true,
     };
@@ -118,6 +224,7 @@ const BarChart = () => {
         datasets: [
           {
             label: "# of Hits",
+            color : "white",
             data: [33, 40, 28, 49, 58, 38, 44],
             backgroundColor: [
               "#F7604D",
@@ -128,13 +235,14 @@ const BarChart = () => {
               "#DB9C3F",
               "#3889FC",
             ],
-            borderWidth: 0,
+            // borderWidth: 4,
+            barPercentage : 0.2,
           },
         ],
       },
       options: optionsBar,
     };
-    // Destroy previous chart if it exists
+    // Destroy the previous chart if it exists
     const existingChart = chartRef.current.chart;
     if (existingChart) {
       existingChart.destroy();
@@ -144,6 +252,8 @@ const BarChart = () => {
 
   return <canvas id="barChart" ref={chartRef} className="chart" />;
 };
+
+
 
 const PieChart = () => {
   const chartRef = useRef(null);
@@ -168,6 +278,9 @@ const PieChart = () => {
         plugins: {
           legend: {
             position: "top",
+            labels: {
+              color: "white",
+            },
           },
         },
       };
@@ -204,6 +317,22 @@ const PieChart = () => {
 };
 
 function ProductAdminDashboard() {
+  const [dashboardData, setDashboardData] = useState(null);
+
+  useEffect(() => {
+    // Retrieve data from LocalStorage
+    const data = localStorage.getItem("appData");
+
+    if (data) {
+      // Parse the data if it exists
+      setDashboardData(JSON.parse(data));
+    }
+  }, []);
+
+  if (!dashboardData) {
+    return <div>Loading...</div>; // You can show a loading message if data is not available yet
+  }
+
   return (
     <div className="" id="home">
       <div className="container">

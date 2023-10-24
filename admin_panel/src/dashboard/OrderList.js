@@ -1,37 +1,36 @@
 import React, { Component } from "react";
-import "./css/bootstrap.min.css";
-import "./css/fontawesome.min.css";
-import "./css/templatemo-style.css";
 
 class OrderList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      orders: null,
     };
   }
 
   componentDidMount() {
-    fetch("https://reactmusicplayer-ab9e4.firebaseio.com/project-data.json")
-      .then((response) => response.json())
-      .then((data) => this.setState({ data }))
-      .catch((error) => console.error("Error fetching data: ", error));
+    // Retrieve appData from LocalStorage
+    const appData = JSON.parse(localStorage.getItem("appData"));
+
+    if (appData) {
+      this.setState({
+        orders: appData.dasbhoardPage.orders,
+      });
+    }
   }
 
   render() {
-    const { data } = this.state;
+    const { orders } = this.state;
 
-    if (!data) {
+    if (!orders) {
       return <div>Loading...</div>;
     }
 
-    const orders = data.dasbhoardPage.orders;
-
     return (
       <>
-        <div class="col-12 tm-block-col">
-          <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-            <h2 class="tm-block-title">Orders List</h2>
+        <div className="col-12 tm-block-col">
+          <div className="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+            <h2 className="tm-block-title">Orders List</h2>
             <table className="table">
               <thead>
                 <tr>
@@ -77,4 +76,5 @@ class OrderList extends Component {
     );
   }
 }
+
 export default OrderList;

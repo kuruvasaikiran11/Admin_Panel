@@ -7768,6 +7768,15 @@ a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover {
     margin-left: auto!important
 }
 
+.chart-text {
+    color: white;
+  }
+
+  .bar-chart-container .chart div.chartjs-size-monitor {
+    color: white;
+  }
+  
+
 @media (min-width: 576px) {
     .m-sm-0 {
         margin:0!important
