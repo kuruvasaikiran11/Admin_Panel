@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./Login";
 import ProductAdminDashboard from "./dashboard/ProductAdminDashboard";
 import Products from "./products/Products";
 import Accounts from "./accounts/Accounts";
+import Footer from "./Footer";
 
 // Create a context to share the data
 export const DataContext = React.createContext();
@@ -40,12 +42,14 @@ function App() {
         <Navbar />
         <DataContext.Provider value={data}>
           <Routes>
-            <Route path="/" element={<ProductAdminDashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Admin_Panel" element={<ProductAdminDashboard />} />
             <Route path="/dashboard" element={<ProductAdminDashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/accounts" element={<Accounts />} />
           </Routes>
         </DataContext.Provider>
+        <Footer />
       </BrowserRouter>
     </>
   );

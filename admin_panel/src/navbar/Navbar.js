@@ -6,7 +6,7 @@ function Navbar() {
     <>
       <nav className="navbar navbar-expand-xl">
         <div className="container h-100">
-          <Link to="/" className="navbar-brand">
+          <Link to="/Admin_Panel" className="navbar-brand">
             <h1 className="tm-site-title mb-0">Product Admin</h1>
           </Link>
           <button
@@ -45,9 +45,12 @@ function Navbar() {
             </ul>
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link d-block" href="login.html">
+                {/* <a className="nav-link d-block" href="login.js">
                   Admin, <b>Logout</b>
-                </a>
+                </a> */}
+                <Link to="/login" className="nav-link d-block">
+                  Admin, <b>Logout</b>
+                </Link>
               </li>
             </ul>
           </div>

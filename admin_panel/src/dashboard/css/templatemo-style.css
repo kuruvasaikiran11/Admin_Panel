@@ -204,7 +204,7 @@ html {
   .table {
     background-color: #50697f;
     color: #fff;
-    font-size: 85%;
+    font-size: 100%;
     margin-bottom: 0;
   }
   thead {
@@ -573,6 +573,10 @@ html {
   .tm-footer-link:hover,
   .tm-footer-link:focus {
     color: #aacbea;
+  }
+
+  b{
+    display: inline-block;
   }
   
   @media (min-width: 1200px) {
