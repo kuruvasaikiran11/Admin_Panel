@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import ProductAdminDashboard from "./dashboard/ProductAdminDashboard";
 import Products from "./products/Products";
 import Accounts from "./accounts/Accounts";
 import Footer from "./Footer";
+import NewProduct from "./products/NewProduct";
+import AddCategory from "./products/AddCategory";
 
-// Create a context to share the data
 export const DataContext = React.createContext();
 
 function App() {
   const [data, setData] = useState(null);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if the data is available in local storage
     const storedData = localStorage.getItem("appData");
+    const userLoggedIn = localStorage.getItem("userLoggedIn");
+    setUserLoggedIn(userLoggedIn === "true"); // Parse the value as a boolean
 
     if (storedData) {
-      // If data is available in local storage, parse and use it
       setData(JSON.parse(storedData));
     } else {
-      // If data is not in local storage, fetch it from the API
       fetch("https://reactmusicplayer-ab9e4.firebaseio.com/project-data.json")
         .then((response) => response.json())
         .then((apiData) => {
-          // Store the data in local storage for future use
           localStorage.setItem("appData", JSON.stringify(apiData));
           setData(apiData);
         })
@@ -36,22 +36,32 @@ function App() {
     }
   }, []);
 
+  const handleLogin = () => {
+    setUserLoggedIn(true);
+    localStorage.setItem("userLoggedIn", "true");
+  };
+
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
-        <DataContext.Provider value={data}>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/Admin_Panel" element={<ProductAdminDashboard />} />
-            <Route path="/dashboard" element={<ProductAdminDashboard />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/accounts" element={<Accounts />} />
-          </Routes>
-        </DataContext.Provider>
-        <Footer />
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      {/* <Navigate to="/" /> */}
+            <Navbar />     {" "}
+      <DataContext.Provider value={data}>
+               {" "}
+        <Routes>
+                   {" "}
+          <Route path="/" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/dashboard" element={userLoggedIn ? <ProductAdminDashboard /> : <Navigate to="/" />} />
+          <Route path="/products" element={userLoggedIn ? <Products /> : <Navigate to="/" />} />
+          <Route path="/accounts" element={userLoggedIn ? <Accounts /> : <Navigate to="/" />} />
+          <Route path="/products/add-product" element={userLoggedIn ? <NewProduct /> : <Navigate to="/" />} />
+          <Route path="/products/add-category" element={userLoggedIn ? <AddCategory /> : <Navigate to="/" />} />
+          <Route path="*" element={<h1 style={{ color: "white", textAlign : "center"}}>404 Not found!!</h1>} />
+                 {" "}
+        </Routes>
+             {" "}
+      </DataContext.Provider>
+            <Footer />   {" "}
+    </BrowserRouter>
   );
 }
 

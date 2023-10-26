@@ -1,12 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate(); 
+  const handleLogout = () => {
+    localStorage.setItem("userLoggedIn", false);
+    navigate("/");
+    window.location.reload();
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-xl">
         <div className="container h-100">
-          <Link to="/Admin_Panel" className="navbar-brand">
+          <Link to="/dashboard" className="navbar-brand">
             <h1 className="tm-site-title mb-0">Product Admin</h1>
           </Link>
           <button
@@ -45,12 +52,9 @@ function Navbar() {
             </ul>
             <ul className="navbar-nav">
               <li className="nav-item">
-                {/* <a className="nav-link d-block" href="login.js">
+                <a className="nav-link d-block" onClick={handleLogout}>
                   Admin, <b>Logout</b>
-                </a> */}
-                <Link to="/login" className="nav-link d-block">
-                  Admin, <b>Logout</b>
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

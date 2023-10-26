@@ -4,20 +4,23 @@ import "./dashboard/css/bootstrap.min.css";
 import "./dashboard/css/fontawesome.min.css";
 import "./dashboard/css/templatemo-style.css";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Check if username and password are valid
     if (username === "saisk" && password === "saisk") {
-      setError();
+      setError("");
 
-      // Proceed with login by redirecting to the dashboard page
+      // Call the handleLogin function to set the user as logged in
+      handleLogin();
+
+      // Redirect to the dashboard page
       navigate("/dashboard");
     } else {
       // Invalid credentials, show an error message
@@ -42,7 +45,7 @@ const Login = () => {
                 <div className="col-12">
                   <form
                     action="#"
-                    onSubmit={handleLogin}
+                    onSubmit={handleSubmit} // Use the handleSubmit function for form submission
                     className="tm-login-form"
                   >
                     {error && <p className="text-danger">{error}</p>}

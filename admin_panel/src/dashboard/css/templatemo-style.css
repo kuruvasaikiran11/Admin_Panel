@@ -583,6 +583,7 @@ html {
     .navbar-expand-xl .navbar-nav .nav-link {
       padding-left: 28px;
       padding-right: 28px;
+      color: white;
     }
     .navbar-collapse {
       height: 100%;
