@@ -43,18 +43,19 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Navigate to="/" /> */}
+      
             <Navbar />     {" "}
       <DataContext.Provider value={data}>
                {" "}
         <Routes>
                    {" "}
-          <Route path="/" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/dashboard" element={userLoggedIn ? <ProductAdminDashboard /> : <Navigate to="/" />} />
-          <Route path="/products" element={userLoggedIn ? <Products /> : <Navigate to="/" />} />
-          <Route path="/accounts" element={userLoggedIn ? <Accounts /> : <Navigate to="/" />} />
-          <Route path="/products/add-product" element={userLoggedIn ? <NewProduct /> : <Navigate to="/" />} />
-          <Route path="/products/add-category" element={userLoggedIn ? <AddCategory /> : <Navigate to="/" />} />
+          <Route path="/Admin_Panel" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/dashboard" element={userLoggedIn ? <ProductAdminDashboard /> : <Navigate to="/login" />} />
+          <Route path="/products" element={userLoggedIn ? <Products /> : <Navigate to="/login" />} />
+          <Route path="/accounts" element={userLoggedIn ? <Accounts /> : <Navigate to="/login" />} />
+          <Route path="/products/add-product" element={userLoggedIn ? <NewProduct /> : <Navigate to="/login" />} />
+          <Route path="/products/add-category" element={userLoggedIn ? <AddCategory /> : <Navigate to="/login" />} />
           <Route path="*" element={<h1 style={{ color: "white", textAlign : "center"}}>404 Not found!!</h1>} />
                  {" "}
         </Routes>

@@ -5,7 +5,7 @@ function Navbar() {
   const navigate = useNavigate(); 
   const handleLogout = () => {
     localStorage.setItem("userLoggedIn", false);
-    navigate("/");
+    navigate("/login");
     window.location.reload();
   };
 
