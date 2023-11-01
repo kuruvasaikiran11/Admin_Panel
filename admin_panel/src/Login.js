@@ -12,21 +12,22 @@ const Login = ({ handleLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     // Check if username and password are valid
     if (username === "saisk" && password === "saisk") {
       setError("");
-
+  
       // Call the handleLogin function to set the user as logged in
       handleLogin();
-
-      // Redirect to the dashboard page
+  
+      // Navigate to the dashboard page
       navigate("/dashboard");
     } else {
       // Invalid credentials, show an error message
       setError("Invalid username or password, try saisk");
     }
   };
+  
 
   return (
     <>
