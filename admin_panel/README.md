@@ -2,7 +2,7 @@ Certainly, here is the information you can include in your README file on GitHub
 
 # Project Name
 
-[Your Project Name]
+Admin Panel
 
 ## Project Description
 
