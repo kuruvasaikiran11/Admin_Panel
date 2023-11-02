@@ -1,11 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../dashboard/css/bootstrap.css"
+import "../dashboard/css/fontawesome.css"
+import "../dashboard/css/templatemo-style.css"
 
 function Navbar() {
   const navigate = useNavigate(); 
   const handleLogout = () => {
     localStorage.setItem("userLoggedIn", false);
-    navigate("/login");
+    navigate("/Admin_Panel");
     window.location.reload();
   };
 

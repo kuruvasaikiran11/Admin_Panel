@@ -4155,7 +4155,8 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
 
     .navbar-expand-xl .navbar-nav {
         -ms-flex-direction: row;
-        flex-direction: row
+        flex-direction: row;
+        cursor: pointer
     }
 
     .navbar-expand-xl .navbar-nav .dropdown-menu {

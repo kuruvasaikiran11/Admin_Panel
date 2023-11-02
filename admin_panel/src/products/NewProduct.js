@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../dashboard/css/bootstrap.min.css"
-import "../dashboard/css/fontawesome.min.css"
+import "../dashboard/css/bootstrap.css"
+import "../dashboard/css/fontawesome.css"
 import "../dashboard/css/templatemo-style.css"
 
 const NewProduct = () => {

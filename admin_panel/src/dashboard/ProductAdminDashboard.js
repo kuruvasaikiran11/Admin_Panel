@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./css/bootstrap.min.css";
-import "./css/fontawesome.min.css";
+import "./css/bootstrap.css";
+import "./css/fontawesome.css";
 import "./css/templatemo-style.css";
 import OrderList from "./OrderList";
 
