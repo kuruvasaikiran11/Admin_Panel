@@ -546,6 +546,12 @@ html {
     border-color: #f5a623;
     color: #f5a623;
   }
+
+  .selected-row {
+    background-color: #8a8383; /* Set the background color you prefer for selected rows */
+    color: black;
+  }
+  
   .tm-nav-icon {
     color: #fff;
   }
